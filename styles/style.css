@@ -1,34 +1,124 @@
-/* General Styles (Previous CSS remains the same) */
-/* Add these new styles for the gallery */
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.gallery-container {
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Header Styles - Compact */
+header {
+    background: #4CAF50;
+    color: white;
+    padding: 5px 0; /* Minimal padding */
     width: 100%;
-    max-width: 800px;
-    margin: 0 auto 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .logo h1 {
+    margin: 0;
+    padding: 0 10px;
+    font-size: 1.3rem; /* Compact size */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 3px 0; /* Minimal padding */
+}
+
+nav ul li {
+    margin: 0 8px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem; /* Compact size */
+}
+
+/* Main Content - No Gaps */
+main {
+    flex: 1;
+    width: 100%;
+    padding: 0; /* No padding to eliminate gaps */
+    margin: 0; /* No margin */
+}
+
+/* Gallery Styles - Full Bleed */
+.gallery-container {
+    width: 100vw; /* Full viewport width */
+    margin-left: calc(-50vw + 50%); /* Center trick */
     overflow: hidden;
     position: relative;
 }
 
 .gallery-slide {
     display: flex;
-    width: 300%; /* 3 images = 300% width */
-    animation: slide 12s infinite; /* 4s per image × 3 images */
+    width: 300%;
+    height: 50vh; /* Adjust height as needed */
+    transition: transform 1s ease-in-out;
 }
 
 .gallery-slide img {
-    width: 33.33%; /* Each image takes 1/3 of the container */
-    height: auto;
+    width: 33.3333%;
+    height: 100%;
+    object-fit: cover;
+    display: block; /* Remove any inline spacing */
 }
 
-/* Animation for sliding */
-@keyframes slide {
-    0% { transform: translateX(0); }
-    33% { transform: translateX(-33.33%); }
-    66% { transform: translateX(-66.66%); }
-    100% { transform: translateX(0); }
+/* Content Sections */
+.hero, .announcements {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Pause on hover */
-.gallery-container:hover .gallery-slide {
-    animation-play-state: paused;
+/* Footer Styles - Fixed Visibility */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+body.scrolled footer {
+    transform: translateY(0);
+}
+
+/* Ensure content doesn't hide behind footer */
+main {
+    padding-bottom: 50px; /* Match footer height */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    header .logo h1 {
+        font-size: 1.1rem;
+    }
+    
+    nav ul li a {
+        font-size: 0.75rem;
+    }
+    
+    .gallery-slide {
+        height: 40vh;
+    }
 }
